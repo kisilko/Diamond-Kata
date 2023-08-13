@@ -3,6 +3,7 @@ package hometask;
 public class RhombusDiamondGenerator {
     private int rhombusHeight;
     private String blankRow;
+
     public String generate(char ch) {
         sanitiseInput(ch);
         calculateOutputCanvasSize(ch);
