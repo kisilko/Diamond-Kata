@@ -7,21 +7,24 @@ public class RhombusDiamondGenerator {
     public String generate(char ch) {
         sanitiseInput(ch);
         calculateOutputCanvasSize(ch);
-        return generateRhombus(ch);
+        return generateRhombus(0);
     }
 
-    private String generateRhombus(char ch) {
-        if (ch == 'A') {
-            return generateTopVertex();
+    private String generateRhombus(int level) {
+        String output;
+        if (level == rhombusHeight / 2) {
+            output = generateRhombusCenter(getCharFor(level));
         } else {
-            String rhombusTop = generateRhombusTop(ch);
-            String rhombusCenter = generateRhombusCenter(ch);
-            String rhombusBottom = CharUtils.reverse(rhombusTop);
+            String scanline = (level == 0) ? generateTopVertex() : generateLine(level);
 
-            return rhombusTop + "\n"
-                 + rhombusCenter + "\n"
-                 + rhombusBottom;
+            output = scanline + "\n";
+            output += generateRhombus(level + 1);
+            output += scanline;
         }
+        if (level > 0) {
+            output += "\n";
+        }
+        return output;
     }
 
     private void sanitiseInput(char inputChar) {
@@ -37,15 +40,6 @@ public class RhombusDiamondGenerator {
 
     private String generateRhombusCenter(char ch) {
         return CharUtils.setCharacterAt(blankRow, ch, 0, rhombusHeight - 1);
-    }
-
-    private String generateRhombusTop(char toChar) {
-        String topVertex = generateTopVertex();
-        StringBuilder output = new StringBuilder(topVertex);
-        for (int i = 1; i < rhombusHeight / 2; i++) {
-            output.append("\n").append(generateLine(i));
-        }
-        return output.toString();
     }
 
     private String generateLine(int level) {
