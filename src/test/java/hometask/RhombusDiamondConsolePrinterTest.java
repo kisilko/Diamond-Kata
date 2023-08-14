@@ -17,11 +17,11 @@ class RhombusDiamondConsolePrinterTest {
     public void it_throws_exception_on_incorrect_input() {
         // given
         char invalidInput = '=';
-        RhombusDiamondGenerator printer = new RhombusDiamondGenerator();
+        RhombusDiamondRenderer printer = new RhombusDiamondRenderer();
 
         // when
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            printer.generate(invalidInput);
+            printer.render(invalidInput);
         });
 
         assertThat(thrown.getMessage()).isEqualTo("Input char can't be smaller that 'A' in ascii table");
@@ -31,10 +31,10 @@ class RhombusDiamondConsolePrinterTest {
     @MethodSource("diamondDataProvider")
     public void it_generates_rhombus_diamond_on_valid_input(char input, String expected) {
         // given
-        RhombusDiamondGenerator printer = new RhombusDiamondGenerator();
+        RhombusDiamondRenderer printer = new RhombusDiamondRenderer();
 
         // when
-        String diamond = printer.generate(input);
+        String diamond = printer.render(input);
 
         // then
         assertThat(diamond).isEqualTo(expected);
