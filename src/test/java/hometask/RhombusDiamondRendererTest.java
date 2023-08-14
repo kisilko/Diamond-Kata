@@ -11,17 +11,17 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class RhombusDiamondConsolePrinterTest {
+class RhombusDiamondConsolediamondRendererTest {
 
     @Test
     public void it_throws_exception_on_incorrect_input() {
         // given
         char invalidInput = '=';
-        RhombusDiamondRenderer printer = new RhombusDiamondRenderer();
+        RhombusDiamondRenderer diamondRenderer = new RhombusDiamondRenderer();
 
         // when
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            printer.render(invalidInput);
+            diamondRenderer.render(invalidInput);
         });
 
         assertThat(thrown.getMessage()).isEqualTo("Input char can't be smaller that 'A' in ascii table");
@@ -31,10 +31,10 @@ class RhombusDiamondConsolePrinterTest {
     @MethodSource("diamondDataProvider")
     public void it_generates_rhombus_diamond_on_valid_input(char input, String expected) {
         // given
-        RhombusDiamondRenderer printer = new RhombusDiamondRenderer();
+        RhombusDiamondRenderer diamondRenderer = new RhombusDiamondRenderer();
 
         // when
-        String diamond = printer.render(input);
+        String diamond = diamondRenderer.render(input);
 
         // then
         assertThat(diamond).isEqualTo(expected);
