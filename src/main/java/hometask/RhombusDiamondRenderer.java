@@ -5,7 +5,7 @@ public class RhombusDiamondRenderer {
     private String blankLine;
 
     public String render(char ch) {
-        sanitiseInput(ch);
+        validateInput(ch);
         calculateOutputCanvasSize(ch);
         return renderRhombus(0);
     }
@@ -27,7 +27,7 @@ public class RhombusDiamondRenderer {
         return output;
     }
 
-    private void sanitiseInput(char ch) {
+    private void validateInput(char ch) {
         if (ch < 'A') {
             throw new IllegalArgumentException("Input char can't be smaller that 'A' in ascii table");
         }
